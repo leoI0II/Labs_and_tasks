@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/Recurtion_tree_check.dir/main.c.o -o Recurtion_tree_check 
