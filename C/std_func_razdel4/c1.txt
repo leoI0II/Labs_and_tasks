@@ -1,1 +1,0 @@
-9 Hello from c1 and c2.
