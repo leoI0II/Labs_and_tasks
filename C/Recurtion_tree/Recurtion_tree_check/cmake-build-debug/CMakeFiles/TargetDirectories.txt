@@ -1,0 +1,3 @@
+/home/leo11/Projects/C/Recurtion_tree/Recurtion_tree_check/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/leo11/Projects/C/Recurtion_tree/Recurtion_tree_check/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/leo11/Projects/C/Recurtion_tree/Recurtion_tree_check/cmake-build-debug/CMakeFiles/Recurtion_tree_check.dir

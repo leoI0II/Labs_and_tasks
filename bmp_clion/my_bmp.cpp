@@ -1,0 +1,931 @@
+#include"my_bmp.h"
+// #include<iostream>
+// #include<cstdio>
+// #include<cctype>
+// #include<cstdlib>
+// #include<ctime>
+// #include<fstream>
+// #define _USE_MATH_DEFINES
+// #include<cmath>
+// #include <algorithm>
+// #include"my_bmp_v3.h"
+
+std::ostream& operator<<(std::ostream& fos, const bmp_v3& file_data)
+{
+    fos.write((char*)&file_data, sizeof(bmp_v3) - sizeof(rgb**));
+    for (int i=0; i < file_data.fileInfoHeader.height; i++)
+        fos.write((char*)file_data.pixels[i], file_data.fileInfoHeader.width * sizeof(rgb) + (file_data.fileInfoHeader.width * sizeof(rgb))%4);
+
+    return fos;
+}
+
+
+std::ostream& operator<<(std::ostream& fos, const bmp_v3* file_data)
+{
+    fos.write((char*)file_data, sizeof(bmp_v3) - sizeof(rgb**));
+    for (int i=0; i < file_data->fileInfoHeader.height; i++)
+        fos.write((char*)file_data->pixels[i], file_data->fileInfoHeader.width * sizeof(rgb) + (file_data->fileInfoHeader.width * sizeof(rgb))%4);
+
+    return fos;
+}
+
+
+void change_color_from_user(bmp_v3& a)
+{
+    std::string choice;
+    std::string change;
+    bool flag1 = 0, flag2 = 0;
+    // std::cout << "Enter what color you want to replace? (red/green/blue): ";
+
+    while (flag1 == 0)
+    {
+        std::cout << "Enter what color you want to replace? (red/green/blue): ";
+        std::getline(std::cin, choice);
+        // to_lower_str(choice);
+        if (choice == "red" || choice == "blue" || choice == "green")
+            flag1 = 1;
+        else
+            std::cout << "Need to enter red/blue/green!" << std::endl << "Try again" << std::endl;
+    }
+
+    while(flag2 == 0)
+    {
+        std::cout << "Enter what color do you want to replace? (red/green/blue): ";
+        std::getline(std::cin, change);
+        // to_lower_str(change);
+        if (change == "red" || change == "blue" || change == "green")
+            flag2 = 1;
+        else
+            std::cout << "Need to enter red/blue/green!" << std:: endl << "Try again" << std::endl;
+    }
+
+    a.change_color(choice, change);
+}
+
+void bmp_v3::change_color(const std::string& choice, const std::string& change)
+{
+    if (choice == "red")
+    {
+        if (change == "red")
+            this->change_red_color(255);
+        else if (change == "blue")
+            this->change_blue_color(255);
+        else if (change == "green")
+            this->change_green_color(255);
+    }
+    else if (choice == "blue")
+    {
+        if (change == "red")
+            this->change_red_color(255);
+        else if (change == "blue")
+            this->change_blue_color(255);
+        else if (change == "green")
+            this->change_green_color(255);
+    }
+    else if (choice == "green")
+    {
+        if (change == "red")
+            this->change_red_color(255);
+        else if (change == "blue")
+            this->change_blue_color(255);
+        else if (change == "green")
+            this->change_green_color(255);
+    }
+}
+
+void bmp_v3::save_changes(const char* new_file_name)
+{
+    std::ofstream fout(new_file_name, std::ofstream::binary);
+    fout.write((const char*)this, sizeof(fileHeader));
+    fout.write((const char*)this, sizeof(fileInfoHeader));
+    for (int i = 0; i < fileInfoHeader.height; i++)
+        fout.write((const char*)pixels[i], fileInfoHeader.width * sizeof(rgb) + (fileInfoHeader.width * sizeof(rgb))%4);
+    fout.close();
+}
+
+bmp_v3::~bmp_v3(){
+    for (int i = 0; i < fileInfoHeader.height; i++)
+        delete [] pixels[i];
+    delete [] pixels;
+}
+
+void bmp_v3::info()
+{
+    std::printf("signature:\t%x\t(%hu)\n", this->fileHeader.signature, this->fileHeader.signature);
+    std::printf("filesize:\t%x\t(%u)\n", this->fileHeader.file_size, this->fileHeader.file_size);
+    std::printf("reserved1:\t%x\t(%hu)\n", this->fileHeader.reserved1, this->fileHeader.reserved1);
+    std::printf("reserved2:\t%x\t(%hu)\n", this->fileHeader.reserved2, this->fileHeader.reserved2);
+    std::printf("pixelArrOffset:\t%x\t(%u)\n", this->fileHeader.offset_PA, this->fileHeader.offset_PA);
+
+    std::printf("headerSize:\t%x\t(%u)\n", this->fileInfoHeader.header_size, this->fileInfoHeader.header_size);
+    std::printf("width:     \t%x\t(%u)\n", this->fileInfoHeader.width, this->fileInfoHeader.width);
+    std::printf("height:    \t%x\t(%u)\n", this->fileInfoHeader.height, this->fileInfoHeader.height);
+    std::printf("planes:    \t%x\t(%hu)\n", this->fileInfoHeader.color_planes_num, this->fileInfoHeader.color_planes_num);
+    std::printf("bitsPerPixel:\t%x\t(%hu)\n", this->fileInfoHeader.bits_for_pixel, this->fileInfoHeader.bits_for_pixel);
+    std::printf("compression:\t%x\t(%u)\n", this->fileInfoHeader.compression, this->fileInfoHeader.compression);
+    std::printf("imageSize:\t%x\t(%u)\n", this->fileInfoHeader.image_size, this->fileInfoHeader.image_size);
+    std::printf("xPixelsPerMeter:\t%x\t(%u)\n", this->fileInfoHeader.X_ppm, this->fileInfoHeader.X_ppm);
+    std::printf("yPixelsPerMeter:\t%x\t(%u)\n", this->fileInfoHeader.Y_ppm, this->fileInfoHeader.Y_ppm);
+    std::printf("colorsInColorTable:\t%x\t(%u)\n", this->fileInfoHeader.colors_color_table, this->fileInfoHeader.colors_color_table);
+    std::printf("importantColorCount:\t%x\t(%u)\n", this->fileInfoHeader.important_color, this->fileInfoHeader.important_color);
+}
+
+
+// unsigned char bitextract(const unsigned int byte, const unsigned int mask) {
+//     if (mask == 0) {
+//         return 0;
+//     }
+//     // определение количества нулевых бит справа от маски
+//     int
+//         maskBufer = mask,
+//         maskPadding = 0;
+//     while (!(maskBufer & 1)) {
+//         maskBufer >>= 1;
+//         maskPadding++;
+//     }
+//     // применение маски и смещение
+//     return (byte & mask) >> maskPadding;
+// }
+// template <typename Type>
+// void read(std::ifstream &fp, Type &result, std::size_t size) {
+//     fp.read(reinterpret_cast<char*>(&result), size);
+// }
+
+
+bmp_v3::bmp_v3(const char* file_name)
+{
+    std::ifstream fout(file_name, std::ifstream::binary);
+    if(!fout.is_open()){
+        std::cout << "ERROR open file" << std::endl;
+        exit(EXIT_SUCCESS);
+    }
+
+    fout.read(reinterpret_cast<char*>(&fileHeader), sizeof(file_header));
+    fout.read(reinterpret_cast<char*>(&fileInfoHeader), sizeof(file_info_header));
+
+    // fout.read(reinterpret_cast<char*>(this), sizeof(signature));
+    // read(fout, this->signature, sizeof(signature));
+    // fout.read(reinterpret_cast<char*>(this), sizeof(file_size));
+    // fout.read(reinterpret_cast<char*>(this), sizeof(reserved1));
+    // fout.read(reinterpret_cast<char*>(this), sizeof(reserved2));
+    // fout.read(reinterpret_cast<char*>(this), sizeof(offset_PA));
+    // std::cout << signature << std::endl;
+    // printf("signature:\t%x\t(%hu)\n", this->signature, this->signature);
+    // if (signature != 0x4D42)
+    // {
+    //     std::cout << "Error! This isnt a BMP file!" << std::endl;
+    //     exit(EXIT_FAILURE);
+    // }
+    // fout.read(reinterpret_cast<char*>(this), sizeof(header_size));
+    //core v
+    // if (header_size >= 12)
+    // {
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(width));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(height));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(color_planes_num));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(bits_for_pixel));
+    // }
+    // int colors_count = bits_for_pixel >> 3;
+    // if (colors_count < 3) {
+    //     colors_count = 3;
+    // }
+    // int bits_on_color = bits_for_pixel / colors_count;
+    // int mask_value = (1 << bits_on_color) - 1;
+    //ver 1
+    // if (header_size >= 40)
+    // {
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(compression));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(image_size));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(X_ppm));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(Y_ppm));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(colors_color_table));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(important_color));
+    // }
+    //ver 2
+    // RedMask = 0;
+    // GreenMask = 0;
+    // BlueMask = 0;
+    // if (header_size >= 52)
+    // {
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(RedMask));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(GreenMask));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(BlueMask));
+    // }
+    //if not defined, make default
+    // if (RedMask == 0 || GreenMask == 0 || BlueMask == 0)
+    // {
+    //     RedMask = mask_value << (bits_on_color * 2);
+    //     GreenMask = mask_value << bits_on_color;
+    //     BlueMask = mask_value;
+    // }
+    //ver 3
+    // if (header_size >= 56)
+    // {
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(AlphaMask));
+    // }
+    // else{
+    //     AlphaMask = mask_value << (bits_on_color * 3);
+    // }
+    //ver 4
+    // if (header_size >= 108)
+    // {
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(CSType));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(Endpoints));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(GammaRed));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(GammaGreen));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(GammaBlue));
+    // }
+    //ver 5
+    // if (header_size >= 124)
+    // {
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(Intent));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(ProfileData));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(ProfileSize));
+    //     fout.read(reinterpret_cast<char*>(this), sizeof(Reserved));
+    // }
+    //supported or not
+    // if (header_size != 12 && header_size != 40 && header_size != 52 &&
+    //     header_size != 56 && header_size != 108 && header_size != 124) {
+    //     std::cout << "Error: Unsupported BMP format." << std::endl;
+    //     exit(EXIT_FAILURE);
+    // }
+    // if (bits_for_pixel != 16 && bits_for_pixel != 24 && bits_for_pixel != 32) {
+    //     std::cout << "Error: Unsupported BMP bit count." << std::endl;
+    //     exit(EXIT_FAILURE);
+    // }
+    // if (compression != 0 && compression != 3) {
+    //     std::cout << "Error: Unsupported BMP compression." << std::endl;
+    //     exit(EXIT_FAILURE);
+    // }
+    // std::cout << "Object created" << std::endl;
+    // pixels = new rgb*[height];
+    // for (int i = 0; i < height; i++)
+    //     pixels[i] = new rgb[width];
+    // //padding
+    // int linePadding = ((width * (bits_for_pixel / 8)) % 4) & 3;
+    // unsigned int bufer;
+    // for (unsigned int i = 0; i < height; i++) {
+    //     for (unsigned int j = 0; j < width; j++) {
+    //         fout.read(reinterpret_cast<char*>(&bufer), bits_for_pixel / 8);
+    //         pixels[i][j].red = bitextract(bufer, RedMask);
+    //         pixels[i][j].green = bitextract(bufer, GreenMask);
+    //         pixels[i][j].blue = bitextract(bufer, BlueMask);
+    //         pixels[i][j].Reserved = bitextract(bufer, AlphaMask);
+    //     }
+    //     fout.seekg(linePadding, std::ios_base::cur);
+    // }
+
+    // pixels = new rgb*[fileInfoHeader.height * sizeof(rgb*)];
+    pixels = (rgb**) malloc (fileInfoHeader.height * sizeof(rgb*));
+    for (int i = 0; i < fileInfoHeader.height; i++)
+    {
+        // pixels[i] = new rgb[fileInfoHeader.width * sizeof(rgb) + (fileInfoHeader.width * sizeof(rgb))%4];
+        pixels[i] = (rgb*) malloc (fileInfoHeader.width * sizeof(rgb) + (fileInfoHeader.width * sizeof(rgb))%4);
+        fout.read((char*)pixels[i], fileInfoHeader.width * sizeof(rgb) + (fileInfoHeader.width * sizeof(rgb))%4);
+    }
+    fout.close();
+}
+
+bmp_v3::bmp_v3()
+{
+    std::cout << "Object created" << std::endl;
+}
+
+// BMP_::BMP_(const char* file_name)
+// {
+//     FILE* f = fopen(file_name, "rb");
+//     if (!f)
+//     {
+//         std::cout << "No file found!" << std::endl;
+//         return;
+//     }
+// fread(this, 1, sizeof(BMP_) - sizeof(rgb**), f);
+// std::cout << "Object created" << std::endl;
+// printf("signature:\t%x\t(%hu)\n", this->signature, this->signature);
+// printf("filesize:\t%x\t(%u)\n", this->file_size, this->file_size);
+// printf("reserved1:\t%x\t(%hu)\n", this->reserved1, this->reserved1);
+// printf("reserved2:\t%x\t(%hu)\n", this->reserved2, this->reserved2);
+// printf("pixelArrOffset:\t%x\t(%u)\n", this->offset_PA, this->offset_PA);
+// printf("headerSize:\t%x\t(%u)\n", this->header_size, this->header_size);
+// printf("width:     \t%x\t(%u)\n", this->width, this->width);
+// printf("height:    \t%x\t(%u)\n", this->height, this->height);
+// printf("planes:    \t%x\t(%hu)\n", this->color_planes_num, this->color_planes_num);
+// printf("bitsPerPixel:\t%x\t(%hu)\n", this->bits_for_pixel, this->bits_for_pixel);
+// printf("compression:\t%x\t(%u)\n", this->compression, this->compression);
+// printf("imageSize:\t%x\t(%u)\n", this->image_size, this->image_size);
+// printf("xPixelsPerMeter:\t%x\t(%u)\n", this->X_ppm, this->X_ppm);
+// printf("yPixelsPerMeter:\t%x\t(%u)\n", this->Y_ppm, this->Y_ppm);
+// printf("colorsInColorTable:\t%x\t(%u)\n", this->colors_color_table, this->colors_color_table);
+// printf("importantColorCount:\t%x\t(%u)\n", this->important_color, this->important_color);
+//     pixels = (rgb**) malloc (height * sizeof(rgb*));
+//     for (int i = 0; i < height; i++)
+//     {
+//         pixels[i] = (rgb*) malloc (width * sizeof(rgb) + (width * sizeof(rgb))%4);
+//         fread(pixels[i], 1, width * sizeof(rgb) + (width * sizeof(rgb))%4, f);
+//     }
+//     fclose(f);
+// }
+
+void bmp_v3::exact_changement()
+{
+    std::cout << "Enter what color you want to replace? (3 number from 0 to 255: r/g/b): ";
+    short r, g, b;
+    bool flag1 = 0;
+
+    while (flag1 == 0){
+        std::scanf("%hd%hd%hd", &r, &g, &b);
+        while (std::cin.get() != '\n') continue;
+        if ((r > 255 || r < 0) || (b > 255 || b < 0) || (g > 255 || g < 0))
+        {
+            std::cout << "Please, enter 3 number from 0 to 255!" << std::endl << "Try again: ";
+        }else
+            flag1 = 1;
+    }
+    std::cout << "You entered " << r << " " << g << " " << b << std::endl;
+
+    short o_r, o_g, o_b;
+    bool flag2 = 0;
+    std::cout << "Enter what color do you want to replace? (3 number from 0 to 255: r/g/b): ";
+
+    while (flag2 == 0){
+        std::scanf("%hd%hd%hd", &o_r, &o_g, &o_b);
+        while (std::cin.get() != '\n') continue;
+        if ((o_r > 255 || o_r < 0) || (o_b > 255 || o_b < 0) || (o_g > 255 || o_g < 0))
+        {
+            std::cout << "Please, enter 3 number from 0 to 255!" << std::endl << "Try again: ";
+        }else
+            flag2 = 1;
+    }
+
+    std::cout << "You entered " << o_r << " " << o_g << " " << o_b << std::endl;
+
+    for (int i = 0; i < fileInfoHeader.height; i++){
+        for (int j = 0; j < fileInfoHeader.width; j++){
+            if (pixels[i][j].red == (char)r && pixels[i][j].blue == (char)b && pixels[i][j].green == (char)g)
+            {
+                pixels[i][j].blue = (char)o_b;
+                pixels[i][j].red = (char)o_r;
+                pixels[i][j].green = (char)o_g;
+            }
+        }
+    }
+
+}
+
+void bmp_v3::draw_line(int x0, int y0, int x1, int y1, int maxX, int maxY, int thickness, uint8_t color_red, uint8_t color_green, uint8_t color_blue)
+{
+    ///////////////////////////////////////////////////////////////////
+    int dx = (x1 - x0 >= 0 ? 1 : -1);
+    int dy = (y1 - y0 >= 0 ? 1 : -1);
+
+    int lengthX = abs(x1 - x0);
+    int lengthY = abs(y1 - y0);
+
+    int length = std::max(lengthX, lengthY);
+
+    if (length == 0)
+    {
+        this->setPixel_line(x0, y0, thickness, maxX, maxY, color_red, color_green, color_blue);
+        // this->set_Pixel(x0, y0);
+    }
+
+    if (lengthY <= lengthX)
+    {
+        // Начальные значения
+        int x = x0;
+        int y = y0;
+        int d = -lengthX;
+
+        // Основной цикл
+        length++;
+        while(length--)
+        {
+            this->setPixel_line(x, y, thickness, maxX, maxY, color_red, color_green, color_blue);
+            // this->set_Pixel(x, y);
+            x += dx;
+            d += 2 * lengthY;
+            if (d > 0) {
+                d -= 2 * lengthX;
+                y += dy;
+            }
+        }
+    }
+    else
+    {
+        // Начальные значения
+        int x = x0;
+        int y = y0;
+        int d = -lengthY;
+
+        // Основной цикл
+        length++;
+        while(length--)
+        {
+            this->setPixel_line(x, y, thickness, maxX, maxY, color_red, color_green, color_blue);
+            // this->set_Pixel(x, y);
+            y += dy;
+            d += 2 * lengthX;
+            if (d > 0) {
+                d -= 2 * lengthY;
+                x += dx;
+            }
+        }
+    }
+}
+
+void bmp_v3::_fill(int x, int y, uint8_t r, uint8_t g, uint8_t b, uint8_t r_l, uint8_t g_l, uint8_t b_l)
+{
+    if ((pixels[x][y].red != r || pixels[x][y].green != g || pixels[x][y].blue != b) && (pixels[x][y].red != r_l || pixels[x][y].green != g_l || pixels[x][y].blue != b_l))
+    {
+        set_Pixel(x, y, r, g, b);
+        _fill(x - 1, y, r, g, b, r_l, g_l, b_l);
+        _fill(x + 1, y, r, g, b, r_l, g_l, b_l);
+        _fill(x, y + 1, r, g, b, r_l, g_l, b_l);
+        _fill(x, y - 1, r, g, b, r_l, g_l, b_l);
+    }
+    return;
+}
+
+
+void bmp_v3::fill( int**matrix, uint8_t fill_red, uint8_t fill_green, uint8_t fill_blue)
+{
+    for (int y = 0; y < fileInfoHeader.height; y++)
+        for (int x = 0; x < fileInfoHeader.width; x++)
+            if(matrix[y][x] == 1)
+                this->set_Pixel(y, x, fill_red, fill_green, fill_blue);
+
+    return;
+}
+
+
+void bmp_v3::draw(int x, int y, int radius, bool fill, uint8_t red, uint8_t green, uint8_t blue)
+{
+    if (y + radius > fileInfoHeader.height || x + radius > fileInfoHeader.width || x < radius || y < radius){
+        std::cout << "Error!" << std::endl;
+        return;
+    }
+    float angle_count = 6;
+    double angle = 0;
+
+    point *p = new point[(int)angle_count];
+
+    for(int i = 0; i <= angle_count; i++)
+    {
+        p[i].x = std::round(x + radius*std::cos(angle * M_PI / 180));       //in bitmap is x coordinate
+        p[i].y = std::round(y + radius*std::sin(angle * M_PI / 180));       //in bitmap is y coordinate
+        angle += 360 / angle_count;
+    }
+
+    if (fill){
+
+        int **matrix = new int*[fileInfoHeader.height];
+        for (int i = 0; i < fileInfoHeader.height; i++){
+            matrix[i] = new int[fileInfoHeader.width];
+            for (int j = 0; j < fileInfoHeader.width; j++)
+                matrix[i][j] = 0;
+        }
+
+        for (int y = 0; y < fileInfoHeader.height; y++)
+            for (int x = 0; x < fileInfoHeader.width; x++)
+                if ((p[0].x - x) * (p[1].y - p[0].y) - (p[1].x - p[0].x) * (p[0].y - y) > 0 && (p[1].x - x) * (p[2].y - p[1].y) - (p[2].x - p[1].x) * (p[1].y - y) > 0 &&
+                    (p[2].x - x) * (p[3].y - p[2].y) - (p[3].x - p[2].x) * (p[2].y - y) > 0 && (p[3].x - x) * (p[4].y - p[3].y) - (p[4].x - p[3].x) * (p[3].y - y) > 0 &&
+                    (p[4].x - x) * (p[5].y - p[4].y) - (p[5].x - p[4].x) * (p[4].y - y) > 0 && (p[5].x - x) * (p[6].y - p[5].y) - (p[6].x - p[5].x) * (p[5].y - y) > 0 ||
+                    (p[0].x - x) * (p[1].y - p[0].y) - (p[1].x - p[0].x) * (p[0].y - y) < 0 && (p[1].x - x) * (p[2].y - p[1].y) - (p[2].x - p[1].x) * (p[1].y - y) < 0 &&
+                    (p[2].x - x) * (p[3].y - p[2].y) - (p[3].x - p[2].x) * (p[2].y - y) < 0 && (p[3].x - x) * (p[4].y - p[3].y) - (p[4].x - p[3].x) * (p[3].y - y) < 0 &&
+                    (p[4].x - x) * (p[5].y - p[4].y) - (p[5].x - p[4].x) * (p[4].y - y) < 0 && (p[5].x - x) * (p[0].y - p[5].y) - (p[0].x - p[5].x) * (p[5].y - y) < 0)
+                    matrix[y][x] = 1;
+
+        this->fill(matrix, 255, 255, 255);
+        for (int i = 0; i < fileInfoHeader.height; i++)
+            delete [] matrix[i];
+        delete [] matrix;
+    }
+
+    for (int i = 0; i < angle_count; i++){
+        this->draw_line(p[i].y, p[i].x, p[i+1].y, p[i+1].x, y+radius+10, x+radius+10, 10, red, green, blue);
+    }
+
+    delete [] p;
+}
+
+
+void bmp_v3::copy_region(int x_left_top_point, int y_left_top_point, int x_right_bottom_point, int y_right_bottom_point, int x_cpy, int y_cpy)
+{
+    int x_count = x_right_bottom_point - x_left_top_point;              //разница по оси х, в бмп по у
+    int y_count = y_left_top_point - y_right_bottom_point;              //разница по оси у
+
+    if (y_count > y_cpy || x_left_top_point > x_right_bottom_point || y_left_top_point < y_right_bottom_point || x_left_top_point > fileInfoHeader.width ||
+        y_left_top_point > fileInfoHeader.height || y_left_top_point < 0 || y_right_bottom_point < 0 || x_right_bottom_point < 0 || x_left_top_point < 0)
+    {
+        std::cout << "Error!!" << std::endl;
+        return;
+    }
+
+    rgb** cpy = new rgb*[y_count];                                      //выделение памяти под двумерный массив пикселей, куда копируются данные блока
+    for (int i = 0; i < y_count; i++)
+        cpy[i] = new rgb[x_count];
+
+    for (int i = y_right_bottom_point, x = 0; i < y_left_top_point; i++, x++)
+    {
+        for (int j = x_left_top_point, y = 0; j < x_right_bottom_point; j++, y++)
+        {
+            cpy[x][y].red = pixels[i][j].red;
+            cpy[x][y].green = pixels[i][j].green;
+            cpy[x][y].blue = pixels[i][j].blue;
+        }
+    }
+
+    for (int x = y_cpy - y_count, i = 0; x < y_cpy; x++, i++)
+    {
+        for (int y = x_cpy, j = 0; y < x_cpy + x_count; y++, j++)
+        {
+            pixels[x][y].red = cpy[i][j].red;
+            pixels[x][y].green = cpy[i][j].green;
+            pixels[x][y].blue = cpy[i][j].blue;
+        }
+    }
+
+    for (int i = 0; i < y_count; i++)
+        delete [] cpy[i];
+    delete [] cpy;
+}
+
+void bmp_v3::draw_line_for_triangle(int x0, int y0, int x1, int y1, uint8_t red, uint8_t green, uint8_t blue)
+{
+    int dx = (x1 - x0 >= 0 ? 1 : -1);
+    int dy = (y1 - y0 >= 0 ? 1 : -1);
+
+    int lengthX = abs(x1 - x0);
+    int lengthY = abs(y1 - y0);
+
+    int length = std::max(lengthX, lengthY);
+
+    if (length == 0)
+    {
+        this->set_Pixel(x0, y0, red, green, blue);
+        // this->set_Pixel(x0, y0);
+    }
+
+    if (lengthY <= lengthX)
+    {
+        // Начальные значения
+        int x = x0;
+        int y = y0;
+        int d = -lengthX;
+
+        // Основной цикл
+        length++;
+        while(length--)
+        {
+            this->set_Pixel(x, y, red, green, blue);
+            // this->set_Pixel(x, y);
+            x += dx;
+            d += 2 * lengthY;
+            if (d > 0) {
+                d -= 2 * lengthX;
+                y += dy;
+            }
+        }
+    }
+    else
+    {
+        // Начальные значения
+        int x = x0;
+        int y = y0;
+        int d = -lengthY;
+
+        // Основной цикл
+        length++;
+        while(length--)
+        {
+            this->set_Pixel(x, y, red, green, blue);
+            // this->set_Pixel(x, y);
+            y += dy;
+            d += 2 * lengthX;
+            if (d > 0) {
+                d -= 2 * lengthY;
+                x += dx;
+            }
+        }
+    }
+
+}
+
+
+void bmp_v3::draw_frame(uint16_t mode, int frame_width, uint8_t color_red, uint8_t color_green, uint8_t color_blue)
+{
+    switch(mode)
+    {
+        case 1:
+            std::cout << "Just a typical frame!" << std::endl;
+
+            for (int i = 0, k = fileInfoHeader.height - frame_width; i < frame_width && k < fileInfoHeader.height; i++, k++)
+                for (int j = 0; j < fileInfoHeader.width; j++)
+                {
+                    this->set_Pixel(i, j, color_red, color_green, color_blue);
+                    this->set_Pixel(k, j, color_red, color_green, color_blue);
+                }
+            for (int i = frame_width; i < fileInfoHeader.height - frame_width; i++)
+                for (int j = 0, k = fileInfoHeader.width - frame_width; j < frame_width && k < fileInfoHeader.width; j++, k++){
+                    this->set_Pixel(i, j, color_red, color_green, color_blue);
+                    this->set_Pixel(i, k, color_red, color_green, color_blue);
+                }
+            break;
+
+        case 2:
+            for(int j = 0; j < fileInfoHeader.width; j++)
+                if (j % 20 >= 10 || j % 20 == 0){
+                    this->set_Pixel(0, j, color_red, color_green, color_blue);
+                    this->set_Pixel(fileInfoHeader.height - 1, j, color_red, color_green, color_blue);
+                }
+
+            for (int i = 1, k = fileInfoHeader.height - frame_width; i < frame_width && k < fileInfoHeader.height - 1; i++, k++)
+                for (int j = 0; j < fileInfoHeader.width; j++)
+                    if (j % 10 == 0){
+                        this->set_Pixel(i, j, color_red, color_green, color_blue);
+                        this->set_Pixel(k, j, color_red, color_green, color_blue);
+                    }
+            for (int j = 0; j < fileInfoHeader.width; j++)
+                if (j % 20 < 10){
+                    this->set_Pixel(frame_width -1 , j, color_red, color_green, color_blue);
+                    this->set_Pixel(fileInfoHeader.height - frame_width, j, color_red, color_green, color_blue);
+                }
+
+            for (int i = 0; i < fileInfoHeader.height; i++)
+                if (i % 20 >= 10){
+                    this->set_Pixel(i, 0, color_red, color_green, color_blue);
+                    this->set_Pixel(i, fileInfoHeader.width - 1, color_red, color_green, color_blue);
+                }
+
+            for (int i = 0; i < fileInfoHeader.height; i++)
+                for (int j = 0, k = fileInfoHeader.width - frame_width; j < frame_width && k < fileInfoHeader.width; j++, k++)
+                    if (i % 10 == 0){
+                        this->set_Pixel(i, j, color_red, color_green, color_blue);
+                        this->set_Pixel(i, k, color_red, color_green, color_blue);
+                    }
+            for (int i = 0; i < fileInfoHeader.height; i++)
+                if (i % 20 < 10){
+                    this->set_Pixel(i, frame_width, color_red, color_green, color_blue);
+                    this->set_Pixel(i, fileInfoHeader.width - frame_width, color_red, color_green, color_blue);
+                }
+
+            break;
+        case 3:{
+            // point tr_points[150];
+            point* tr_points = new point[1];
+            int count_points = 0;
+            for (int i = 0; i < fileInfoHeader.width; i++)
+            {
+                for (int j = 0; j < frame_width; j++)
+                {
+                    if (j == frame_width-1 && i % (50-1) == 24  || j == 0 && i % (50-1) == 0)
+                    {
+                        tr_points[count_points++] = {j, i};
+                        tr_points = (point*) realloc (tr_points, (count_points+1)*sizeof(point));
+                    }
+                }
+            }
+            tr_points[count_points] = {0, (int)fileInfoHeader.width-1};
+            for (int i = 0; i < count_points; i++)
+                this->draw_line_for_triangle(tr_points[i].x, tr_points[i].y, tr_points[i+1].x, tr_points[i+1].y, color_red, color_green, color_blue);
+            delete [] tr_points;
+            for (int i = 0; i < fileInfoHeader.width; i++)
+                this->set_Pixel(0, i, color_red, color_green, color_blue);
+
+            tr_points = new point[1];
+            count_points = 0;
+            for (int i = 0; i < fileInfoHeader.width; i++)
+                for (int j = fileInfoHeader.height - 1; j > fileInfoHeader.height - frame_width-2; j--)
+                    if (j == fileInfoHeader.height - 1 && i % (50-1) == 0 || j == fileInfoHeader.height - frame_width-1 && i % (50-1) == 24)
+                    {
+                        tr_points[count_points++] = {j, i};
+                        tr_points = (point*) realloc (tr_points, (count_points+1)*sizeof(point));
+                    }
+            tr_points[count_points] = {(int)fileInfoHeader.height-1, (int)fileInfoHeader.width-1};
+            for (int i = 0; i < count_points; i++)
+                this->draw_line_for_triangle(tr_points[i].x, tr_points[i].y, tr_points[i+1].x, tr_points[i+1].y, color_red, color_green, color_blue);
+            delete [] tr_points;
+            for (int i = 0; i < fileInfoHeader.width; i++)
+                this->set_Pixel(fileInfoHeader.height-1, i, color_red, color_green, color_blue);
+
+            tr_points = new point[1];
+            count_points = 0;
+            for (int i = 0; i < fileInfoHeader.height; i++)
+                for (int j = 0; j < frame_width; j++)
+                    if (j == 0 && i % (50-1) == 0 || j == frame_width-1 && i % (50-1) == 24)
+                    {
+                        tr_points[count_points++] = {i, j};
+                        tr_points = (point*) realloc (tr_points, (count_points+1)*sizeof(point));
+                    }
+            tr_points[count_points] = {(int)fileInfoHeader.height-1, frame_width-1};
+            for (int i = 0; i < count_points; i++)
+                this->draw_line_for_triangle(tr_points[i].x, tr_points[i].y, tr_points[i+1].x, tr_points[i+1].y, color_red, color_green, color_blue);
+            delete [] tr_points;
+            for (int i = 0; i < fileInfoHeader.height; i++)
+                this->set_Pixel(i, 0, color_red, color_green, color_blue);
+
+            tr_points = new point[1];
+            count_points = 0;
+            for (int i = 0; i < fileInfoHeader.height; i++)
+                for (int j = fileInfoHeader.width-frame_width-1; j < fileInfoHeader.width; j++)
+                    if (j == fileInfoHeader.width-frame_width-1 && i % (50-1) == 0 || j == fileInfoHeader.width-1 && i % (50-1) == 24)
+                    {
+                        tr_points[count_points++] = {i, j};
+                        tr_points = (point*) realloc (tr_points, (count_points+1)*sizeof(point));
+                    }
+            tr_points[count_points] = {(int)fileInfoHeader.height-1, (int)fileInfoHeader.width-1};
+            for (int i = 0; i < count_points; i++)
+                this->draw_line_for_triangle(tr_points[i].x, tr_points[i].y, tr_points[i+1].x, tr_points[i+1].y, color_red, color_green, color_blue);
+            delete [] tr_points;
+            for (int i = 0; i < fileInfoHeader.height; i++)
+                this->set_Pixel(i, 0, color_red, color_green, color_blue);
+
+            break;}
+
+        case 4:{ //sine wave
+
+            double angle = 0;
+            int k = 5;
+            for (k; fileInfoHeader.width%k != 0;k++);
+            std::cout << k << std::endl;
+            int c = 0;
+            point* m = new point[1];
+            int f, i;
+            for (i = 0, f = 0; i < fileInfoHeader.width; i += k, f++)
+            {
+                m[f].y = std::round(frame_width*std::sin(angle*M_PI/180));
+                // std::cout << m[f].y << std::endl;
+                m[f].x = i;
+                c++;
+                m = (point*) realloc(m, (c+1) * sizeof(point));
+                angle += 30;
+                if (angle == 210) angle = 30;
+
+            }
+            m[f] = {(int)fileInfoHeader.width -1, 0};
+            for (int i = 0; i < c; i++)
+            {
+                this->draw_line(m[i].y, m[i].x, m[i+1].y, m[i+1].x, 0, 0, 1, color_red, color_green, color_blue);
+            }
+            delete [] m;
+
+            c = 0;
+            m = new point[1];
+            angle = 180;
+            for (i = 0, f = 0; i < fileInfoHeader.width; i += k, f++)
+            {
+                m[f].y = std::round(frame_width*std::sin(angle*M_PI/180));
+                // std::cout << m[f].y << std::endl;
+                m[f].y += fileInfoHeader.height-1;
+                m[f].x = i;
+                c++;
+                m = (point*) realloc(m, (c+1) * sizeof(point));
+                angle += 30;
+                if (angle == 390) angle = 210;
+
+            }
+            m[f] = {(int)fileInfoHeader.width -1, (int)fileInfoHeader.height-1};
+            for (int i = 0; i < c; i++)
+            {
+                this->draw_line(m[i].y, m[i].x, m[i+1].y, m[i+1].x, 0, 0, 1, color_red, color_green, color_blue);
+            }
+
+            c = 0;
+            m = new point[1];
+            angle = 180;
+            for (i = 0, f = 0; i < fileInfoHeader.height; i += k, f++)
+            {
+                m[f].x = std::round(frame_width*std::sin(angle*M_PI/180));
+                // std::cout << m[f].x << std::endl;
+                m[f].x += fileInfoHeader.width-1;
+                m[f].y = i;
+                c++;
+                m = (point*) realloc(m, (c+1) * sizeof(point));
+                angle += 30;
+                if (angle == 390) angle = 210;
+
+            }
+            m[f] = {m[f-1].x + k, (int)fileInfoHeader.height-1};
+            for (int i = 0; i < c; i++)
+            {
+                this->draw_line(m[i].y, m[i].x, m[i+1].y, m[i+1].x, 0, 0, 1, color_red, color_green, color_blue);
+            }
+
+            c = 0;
+            m = new point[1];
+            angle = 180;
+            for (i = 0, f = 0; i < fileInfoHeader.height; i += k, f++)
+            {
+                m[f].x = std::round(frame_width*std::sin(angle*M_PI/180));
+                // std::cout << m[f].y << std::endl;
+                // m[f].y += height-1;
+                m[f].y = i;
+                c++;
+                m = (point*) realloc(m, (c+1) * sizeof(point));
+                angle += 30;
+                if (angle == 210) angle = 30;
+
+            }
+            m[f] = {m[f-1].x - k, (int)fileInfoHeader.height-1};
+            for (int i = 0; i < c; i++)
+            {
+                this->draw_line(m[i].y, m[i].x, m[i+1].y, m[i+1].x, 0, 0, 1, color_red, color_green, color_blue);
+            }
+
+            break;}
+
+
+        case 5:{                //circles
+
+            int rx = frame_width, ry = 0, x, y;
+            double angle = 0;
+
+            // bottom part
+            while (ry < fileInfoHeader.width + frame_width)
+            {
+                for (int i = 0; i < 360; i++)
+                {
+                    x = std::round(rx + frame_width*std::cos(angle*M_PI/180));                      //okruzhnost parametricheskim sposobom
+                    y = std::round(ry + frame_width*std::sin(angle*M_PI/180));
+                    angle++;
+                    if (y < fileInfoHeader.width && y >= 0)
+                        set_Pixel(x, y, color_red, color_green, color_blue);
+                }
+                // this->_fill(rx, ry+2, 0, 0, 0, color_red, color_green, color_blue);
+                ry += frame_width;
+            }
+
+            //     rx = 0, ry = 0;
+            // for (int i = 0, rx = 0; i < 2; i++, rx += frame_width)
+            //     while (ry < width + frame_width)
+            //     {
+            //         for (int i = 0; i < 360; i++)
+            //         {
+            //             x = std::round(rx + frame_width*std::cos(angle*M_PI/180));                      //okruzhnost parametricheskim sposobom
+            //             y = std::round(ry + frame_width*std::sin(angle*M_PI/180));
+            //             angle++;
+            //             if (y < width && y >= 0 && x >= 0)
+            //                 set_Pixel(x, y, color_red, color_green, color_blue);
+            //         }
+            //         // this->_fill(rx, ry+2, 0, 0, 0, color_red, color_green, color_blue);
+            //         ry += frame_width;
+            //     }
+
+            //top part
+            rx = fileInfoHeader.height - frame_width - 1, ry = 0;
+            angle = 0;
+            while (ry < fileInfoHeader.width + frame_width)
+            {
+                for (int i = 0; i < 360; i++)
+                {
+                    x = std::round(rx + frame_width*std::cos(angle*M_PI/180));                      //okruzhnost parametricheskim sposobom
+                    y = std::round(ry + frame_width*std::sin(angle*M_PI/180));
+                    angle++;
+                    if (y < fileInfoHeader.width && y >= 0)
+                        set_Pixel(x, y, color_red, color_green, color_blue);
+                }
+                ry += frame_width;
+            }
+
+
+            // //left part
+            rx = 0, ry = frame_width;
+            angle = 0;
+            while (rx < fileInfoHeader.height + frame_width)
+            {
+                for (int i = 0; i < 360; i++)
+                {
+                    x = std::round(rx + frame_width*std::cos(angle*M_PI/180));                      //okruzhnost parametricheskim sposobom
+                    y = std::round(ry + frame_width*std::sin(angle*M_PI/180));
+                    angle++;
+                    if (x < fileInfoHeader.height && x >= 0)
+                        set_Pixel(x, y, color_red, color_green, color_blue);
+                }
+                rx += frame_width;
+            }
+
+            // //right part
+            rx = fileInfoHeader.height-1, ry = fileInfoHeader.width - frame_width - 1;
+            angle = 0;
+            while (rx > -frame_width)
+            {
+                for (int i = 0; i < 360; i++)
+                {
+                    x = std::round(rx + frame_width*std::cos(angle*M_PI/180));                      //okruzhnost parametricheskim sposobom
+                    y = std::round(ry + frame_width*std::sin(angle*M_PI/180));
+                    angle++;
+                    if (x < fileInfoHeader.height && x >= 0)
+                        set_Pixel(x, y, color_red, color_green, color_blue);
+                }
+                rx -= frame_width;
+            }
+
+
+            break;
+        }
+
+        default:
+            std::cout << "In developing, choose something else!" << std::endl;
+            break;
+    }
+}

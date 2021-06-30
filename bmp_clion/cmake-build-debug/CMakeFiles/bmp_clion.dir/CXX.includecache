@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/leo11/Projects/bmp_clion/my_bmp.cpp
+my_bmp.h
+/home/leo11/Projects/bmp_clion/my_bmp.h
+
+/home/leo11/Projects/bmp_clion/my_bmp.h
+string
+-
+iostream
+-
+cstdio
+-
+cctype
+-
+cstdlib
+-
+ctime
+-
+fstream
+-
+cmath
+-
+algorithm
+-
+

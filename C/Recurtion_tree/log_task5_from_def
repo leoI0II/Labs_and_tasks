@@ -1,0 +1,22 @@
+Current direct - ./text_files
+filename and dir - ./text_files/ch4.txt
+filename and dir - ./text_files/aaaa.txt
+filename and dir - ./text_files/ch5.txt
+filename and dir - ./text_files/ch3.txt
+filename and dir - ./text_files/ch1.txt
+filename and dir - ./text_files/ch2.txt
+Next direct ./text_files/test
+
+Current direct - ./text_files/test
+Next direct ./text_files/test/ave
+
+Current direct - ./text_files/test/ave
+filename and dir - ./text_files/test/ave/g2.txt
+filename and dir - ./text_files/test/ave/g1.txt
+Current dir is finished ./text_files/test/ave
+filename and dir - ./text_files/test/d3.txt
+filename and dir - ./text_files/test/d2.txt
+filename and dir - ./text_files/test/d1.txt
+Current dir is finished ./text_files/test
+filename and dir - ./text_files/file.txt
+Current dir is finished ./text_files
