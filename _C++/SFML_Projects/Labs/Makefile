@@ -1,0 +1,2 @@
+all:
+	g++ -g Source.cpp FieldCage.cpp FieldCage.hpp Field.cpp Field.hpp CreateField.hpp CreateField.cpp FieldView.hpp FieldView.cpp IEntity.hpp Entity.hpp Enemy.hpp Player.hpp IItem.hpp Item.hpp healthItem.hpp Ammo.hpp HeroWeapon.hpp GranadeItem.hpp -o game -lsfml-graphics -lsfml-window -lsfml-system
