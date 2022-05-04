@@ -1,6 +1,9 @@
 #include<iostream>
 #include<cmath>
 #include<exception>
+#include<vector>
+#include<string>
+
 
 class Vec3D{
 public:
@@ -118,6 +121,8 @@ int main(){
     catch(std::invalid_argument& err){
         err.what();
     }
+
+
 
 
 

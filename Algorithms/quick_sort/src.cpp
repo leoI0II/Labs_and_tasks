@@ -25,23 +25,27 @@ void quickSort(type* arr, int l, int r){
     }
 }
 
+#define COUNT 10
 
 int main(){
 
-    int arr[1000];
+    int arr[COUNT];
     srand(time(NULL));
     
-    for (int i = 0; i < 1000; i++)
-        arr[i] = rand() % 1000 + 1;
-    
-    std::cout << "Start quick sort for array." << std::endl;
+    for (int i = 0; i < COUNT; i++){
+        arr[i] = rand() % 100 + 1;
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl << "Start quick sort for array." << std::endl;
 
     auto start = std::chrono::steady_clock::now();
-    quickSort(arr, 0, 11);
+    quickSort(arr, 0, COUNT-1);
     auto end = std::chrono::steady_clock::now();
     std::chrono::duration<double, std::milli> elapsed_time = end-start;
-
-    std::cout << std::endl << "Duration time: " << elapsed_time.count() << std::endl;
+    for (int i = 0; i < COUNT; ++i)
+        std::cout << arr[i] << " ";
+    std::cout << std::endl;
+    std::cout << "Duration time: " << elapsed_time.count() << std::endl;
 
     return 0;
 }

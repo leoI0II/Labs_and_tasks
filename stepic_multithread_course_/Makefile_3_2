@@ -1,0 +1,4 @@
+all: build_select_server
+
+build_select_server:
+    g++ practice_3_2_select_server.cpp -ggdb -o select_server
