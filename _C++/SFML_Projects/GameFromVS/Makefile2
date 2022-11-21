@@ -1,0 +1,10 @@
+all: Project
+
+Project: Field.o
+	g++ Field.o -o newGame2
+
+Field.o:
+	g++ -c Tile.cpp TileBuilder.cpp BuildDirector.cpp GridCreator.cpp FieldGrid.cpp
+
+clean:
+	rm -rf *.o

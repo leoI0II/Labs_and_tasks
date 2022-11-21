@@ -1,0 +1,466 @@
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:00
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 60; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 66; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 71.6; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 75.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 79.8; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 83.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 87.8; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 91.6; Current HP: 600
+
+11/26/21 02:53:01
+Player: 60 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 64.4 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 68.8 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 74.2 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 78 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 82 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 86 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 90.4 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 94.6 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 98.6 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 103.8 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 107.6 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 112.8 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 116.8 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 121 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 125 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 129 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 133.6 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 137.4 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 142.6 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 147 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 150.4 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 154.6 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 159 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 162.2 96.2; Current HP: 600
+
+11/26/21 02:53:01
+Player: 166.4 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 170 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 175 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 182.6 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 186.4 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 190.8 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 194.6 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 199.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 203.4 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 208.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 211.6 96.2; Current HP: 600
+
+Enemy: 360 109.56; Current HP: 100
+
+11/26/21 02:53:02
+Player: 215 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 220.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 223.8 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 227.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 231.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 234.8 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 238.4 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 242.4 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 247 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 250.4 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 253.8 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 257.6 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 260.8 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 264.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 268.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 272 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 275.4 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 280.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 284.6 96.2; Current HP: 600
+
+Enemy: 744.2 360; Current HP: 300
+
+11/26/21 02:53:02
+Player: 288.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 292.8 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 296.8 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 302 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 306.4 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 311.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 315.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 320.6 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 325 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 330.6 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 334.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 338.6 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 342.4 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 345.8 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 350.4 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 354.2 96.2; Current HP: 600
+
+11/26/21 02:53:02
+Player: 358.2 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 363 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+
+11/26/21 02:53:03
+Player: 367.6 96.2; Current HP: 600
+

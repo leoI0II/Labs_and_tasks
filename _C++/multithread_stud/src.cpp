@@ -8,6 +8,8 @@
 #include<execution>
 #include<sstream>
 #include<unordered_map>
+#include<mutex>
+#include<stack>
 
 void hello(){
     std::cout << "Hello concurrent world!:)" << std::endl;
@@ -65,11 +67,40 @@ public:
     }
 };
 
+std::mutex mtx;
+
+void print_block(int n, char c){
+    mtx.lock();
+    for (size_t i = 0; i < n; ++i) { std::cout << c << std::endl; }
+    std::cout << std::endl;
+    mtx.unlock();
+}
+
+// void ch(std::reference_wrapper<int> ref){
+//     std::cout << ref.get() << " " << &ref.get() << std::endl;
+// }
+
+void messenger(const std::string& msg){
+    for (size_t i = 0; i < msg.size(); ++i){
+        std::this_thread::sleep_for(std::chrono::milliseconds(75));
+        // use std::flush unless auto flush is turned off (std::cout << std::unitbuf;)
+        std::cout << msg[i] << std::flush;
+    }
+    std::cout << std::endl;
+}
+// std::cout << std::unitbuf;
 
 int main(){
 
-    
+    // std::thread t1(print_block, 10, '*');
+    // std::thread t2(print_block, 10, '%');
 
+    // t1.join();
+    // t2.join();
+    
+    // messenger("Hello world!");
+
+    
 
     // std::ostream_iterator<int> s(std::cout, ", ");
     // std::istream_iterator<int> in(std::cin);
@@ -159,7 +190,8 @@ int main(){
     // t.join();
 
     std::cout << "Hello world!" << std::endl;
-    
+
+
     // std::terminate();
 
     // try{

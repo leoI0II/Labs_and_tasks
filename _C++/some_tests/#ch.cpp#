@@ -1,0 +1,17 @@
+#include<iostream>
+
+int main()
+{
+	//std::cout<< (int)'$' << std::endl;
+	//std::cout.put('$'); std::cout << std::endl;
+	
+	std::cout << "\aEnter your code:____\b\b\b\b";
+	int code;
+	std::cin >> code;
+	std::cout << "\aYour code is " << code << std::endl;
+	
+	//std::cout << sizeof(wchar_t) << std::endl;
+
+
+	return 0;
+}
